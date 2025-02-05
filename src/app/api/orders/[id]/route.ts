@@ -7,10 +7,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 
     const client = await pool.connect();
     
-    // 주문 데이터 가져오기
     const orderResult = await client.query('SELECT * FROM "Order" WHERE id = $1', [id]);
     
-    // 해당 주문의 Notes 가져오기
     const notesResult = await client.query('SELECT * FROM "Note" WHERE "orderId" = $1', [id]);
 
     client.release();
